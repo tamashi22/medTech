@@ -2,9 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import "./login.css"
 import { useNavigate } from 'react-router-dom'
-import pose3 from "../../images/pose_3.png"
+import fon from "../../images/fon.jpg"
 import ReactCodeInput from 'react-code-input'
-import { border, borderRadius } from '@mui/system'
+import { alpha, styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 const SendCode=()=> {
@@ -15,26 +15,51 @@ const SendCode=()=> {
           margin:  '4px',
           border: "2px solid ",
           width: '46px',
-          borderRadius: '3px',
+          borderRadius: '4px',
           fontSize: '20px',
           height: '46px',
           textAlign:"center",
-         borderRadius:"4px"
+         borderRadius:"4px",
+         
+         
         },
         inputStyleInvalid: {
           fontFamily: 'monospace',
           margin:  '4px',
           MozAppearance: 'textfield',
-          width: '40px',
-          borderRadius: '3px',
-          fontSize: '14px',
-          height: '26px',
-          paddingLeft: '7px',
-          backgroundColor: 'black',
-          color: 'red',
           border: '1px solid red'
         }
     }
+    const CssTextField = styled(TextField)(({ theme }) => ({
+
+      '& .MuiOutlinedInput-root': {
+        borderRadius: "20px",
+        backgroundColor: theme.palette.mode === 'light' ? '#DBD2FC' : '#DBD2FC',
+        
+        '& fieldset': {
+          
+          borderColor:"#DBD2FC",
+        },
+        '&:hover fieldset': {
+          borderColor: '#DBD2FC',
+        },
+        '&.Mui-focused fieldset': {
+          backgroundColor: theme.palette.mode === 'light' ? '#ffffff' : '#ffffff',
+          border: "1px solid #6E15EB",
+        },
+       
+      },
+      '& label.Mui-focused': {
+        color: '#6E15EB',
+      },
+    }));
+    const ColorButton = styled(Button)(({ theme }) => ({
+      color: theme.palette.getContrastText("#6E15EB"),
+      backgroundColor: "#6E15EB",
+      '&:hover': {
+        backgroundColor: "#8E15EE",
+      },
+    }));
     const [counter, setCounter] = React.useState(60);
     React.useEffect(() => {
         counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
@@ -42,19 +67,30 @@ const SendCode=()=> {
     
   return (
     <div className='wrapper'>
-    <img src={pose3} className="bg" alt="hey" />
+   
     <div className="form__wrapper">
-     <div className='input__wrapper'>
-         <h2>Код подтверждения</h2>
-         <p>На ваш адрес<b> username@gmail.com</b> отправлено письмо с кодом для входа.</p>
+     
+         <p className='sendcode__title'>На ваш адрес<b> username@gmail.com</b> отправлено письмо с кодом для входа.</p>
          <div className='code'>
          <p className='label'>Введите код</p>
      <ReactCodeInput  fields={6} {...props} />
+     
      </div>
-     <Button onClick={()=>navigate("/changepassword")} variant="contained" sx={{background:"#2D89FF",width:"100%",height: "50px",marginTop:"100px", marginBottom:"33px",color:"#000000",fontWeight:"600", fontSize:"17px", lineHeight: "23px",   textTransform: 'none',}}>Войти</Button>
-     <Button variant="contained" sx={{background:"#E8F2FF",width:"100%",height: "50px",marginTop:"10px", marginBottom:"33px",color:"#000000",fontWeight:"600", fontSize:"17px", lineHeight: "23px",   textTransform: 'none',}}>Отправить повторно {counter} сек.</Button>
+     <ColorButton onClick={()=>navigate("/changepassword")} variant="contained" sx={{   textTransform: 'none',
+    minWidth: "450px",
+    height: "60px",
+    marginTop:"100px",
+    borderRadius: "20px",
+    fontSize:"16px",
+    marginBottom:"20px"
+    
+    }}>Войти</ColorButton>
+     <a  href="#" className='resend'>Отправить повторно {counter} сек.</a>
+        
          </div>
-         </div>
+         <div className='back'>
+          <img  className='fon' src={fon}></img>
+        </div>
          </div>
   )
 }

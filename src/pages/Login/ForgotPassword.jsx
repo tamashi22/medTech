@@ -1,19 +1,51 @@
 import React from 'react'
-import pose2 from "../../images/pose_2.png"
+import fon from "../../images/fon.jpg"
+import "./login.css"
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import { alpha, styled } from '@mui/material/styles';
+const CssTextField = styled(TextField)(({ theme }) => ({
+
+  '& .MuiOutlinedInput-root': {
+    borderRadius: "20px",
+    backgroundColor: theme.palette.mode === 'light' ? '#DBD2FC' : '#DBD2FC',
+    
+    '& fieldset': {
+      borderColor:"#DBD2FC",
+    },
+    '&:hover fieldset': {
+      borderColor: '#DBD2FC',
+    },
+    '&.Mui-focused fieldset': {
+
+      border: "1px solid #6E15EB",
+    },
+   
+  },
+  '& label.Mui-focused': {
+    color: '#6E15EB',
+  },
+}));
+const ColorButton = styled(Button)(({ theme }) => ({
+
+  color: theme.palette.getContrastText("#6E15EB"),
+  backgroundColor: "#6E15EB",
+  '&:hover': {
+    backgroundColor: "#8E15EE",
+  },
+}));
 export default function ForgotPassword() {
     const navigate=useNavigate();
   return (
     <div className='wrapper'>
-       <img src={pose2} className="bg" alt="hey" />
+     
        <div className="form__wrapper">
-        <div className='input__wrapper'>
-            <h1 className='forgot__title'>Забыли свой пароль ? </h1>
+       
+            <h2 className='forgot__title'>Забыли свой пароль ? </h2>
             <form>
           
-        <TextField
+        <CssTextField
           id="outlined-textarea"
           label="Введите ваш E-mail"
           placeholder="example@medtech.com"
@@ -22,17 +54,23 @@ export default function ForgotPassword() {
             fontSize: "18px",
             lineHeight: "21px",
             letterSpacing: "-0.04em",
-            color: "#141414",
-              width:"100%",
-              height: "47px",
-              marginTop:'40px'
-              
+            width: "450px",
+            height: "60px",
+            marginTop:"100px"
           }}
         />
-        <Button variant="contained" onClick={()=>navigate("/sendcode")} sx={{background:"#2D89FF",width:"100%",height: "50px",marginTop:"150px", marginBottom:"33px",color:"#000000",fontWeight:"600", fontSize:"17px", lineHeight: "23px",   textTransform: 'none',}}>Отправить</Button>
+        <ColorButton variant="contained" onClick={()=>navigate("/sendcode")} sx={{   textTransform: 'none',
+       width: "450px",
+       height: "60px",
+       marginTop:"100px",
+       borderRadius: "20px",
+      }}>Отправить</ColorButton>
         </form>
             </div>
-            </div>
+           
+            <div className='back'>
+          <img className='fon' src={fon}></img>
+        </div>
             </div>
 
   )

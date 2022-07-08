@@ -4,7 +4,7 @@ import profileImg from "../../images/profile.png"
 import p from "../../images/pencil.svg"
 function ProfilePage() {
   return (
-    <div className='wrapper'>
+    <div className='wrapper2'>
         <div className='profile__wrapper' >
             <div className='paddings'>
                 <h2>Кубанычбеков Бектур</h2>
