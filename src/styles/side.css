@@ -1,0 +1,21 @@
+.side__wrapper {
+    height: 100vh;
+
+}
+
+.logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    margin-bottom: 70px;
+}
+
+.sideImg {
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    margin-left: 27px;
+    border: 2px solid #4A5466;
+    margin-bottom: 20%;
+}

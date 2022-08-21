@@ -1,60 +1,102 @@
-.wrapper{
-    max-width: 100%;
-    max-height: vh;
-    background-color: #EFF3FF;
-    background-size: cover;
-    display: flex;
-    overflow: hidden;
-    justify-content: space-between;
+.wrapper {
+  max-width: 100%;
+  max-height: vh;
+
+  display: flex;
 }
-.back
-{
-    width: 60%;
-    height: 100vh;
+
+.logo_style {
+
+  margin-top: 60px;
+  margin-left: 40px;
+}
+
+.png {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 25%;
+}
+
+.fon_bg {
+  background-color: #EEF0F4;
+  background-size: cover;
+  width: 40%;
+  height: 100vh;
+}
+
+.back {
+  width: 60%;
+  height: 100vh;
   overflow: hidden;
   margin: 0;
 }
-.fon{
-    height: 100vh;
-    width: 100%;
-    
+
+.fon {
+  height: 100vh;
+  width: 100%;
+
 }
-.form__wrapper{
+
+.form__wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
   align-items: center;
-  max-width: 40%;
+  width: 60%;
 }
-.forgot{
-    font-size: 17spx;
-    text-decoration: none;
-    color: #2B1854;
+
+.forgot {
+  font-size: 17spx;
+  text-decoration: none;
+  color: #2B1854;
 }
-.sendcode__title{
+
+.sendcode__title {
   padding-left: 100px;
   padding-right: 100px;
-font-style: normal;
-font-weight: 500;
-font-size: 20px;
-line-height: 33px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 33px;
 
-letter-spacing: -0.04em;
+  letter-spacing: -0.04em;
 
-color: #2B1854;
+  color: #141517;
 
-}
-.code{
- text-align: left;
- margin-top: 2em;
 
 }
-.resend{
+
+.code {
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+
+}
+
+.resend {
   color: #6E15EB;
   font-style: normal;
-font-weight: 600;
-font-size: 16px;
-line-height: 24px;
-cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+h1 {
+  color: #141517
+}
+
+.dash {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23333' stroke-width='8' stroke-dasharray='43' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+  width: 500px;
+  height: 2px;
+  margin-left: 50px;
+  margin-bottom: 50px;
+
+
 }

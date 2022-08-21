@@ -1,0 +1,23 @@
+.subhead{
+    
+    height: 80px;
+    border-bottom: 2px solid #ABC3E6;
+    border-top: 2px solid #ABC3E6;
+    padding-left: 40px;
+    padding-right: 40px;
+    display: flex;
+    align-items: center;
+    color:#4A5466;
+    justify-content: space-between;
+}
+.header_wrapper{
+    height: 125px;
+    padding-left: 40px;
+    padding-right: 40px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #ABC3E6;
+    justify-content: space-between;
+}
+
+

@@ -1,0 +1,52 @@
+.medWrapper {
+    margin-top: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+
+}
+
+.medHead {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom: 2px solid #ABC3E6;
+    flex-direction: column;
+}
+
+.medWrapper2 {
+    background: #ffffff;
+    border-radius: 10px;
+
+}
+
+.medTitle {
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: #141517;
+}
+.medSubTitle {
+    
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 29px;
+    color: #141517;
+}
+.medPart1{
+    padding: 40px;
+    border-bottom: 2px solid #ABC3E6;
+    
+}
+.medFlex1{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.medPart2{
+    padding: 40px;
+}

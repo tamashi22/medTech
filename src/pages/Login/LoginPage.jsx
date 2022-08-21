@@ -1,29 +1,40 @@
-import React, { useState, useEffect  } from 'react'
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./login.css"
-import fon from "../../images/fon.jpg"
-
-import { Link, Navigate, useNavigate,Redi } from 'react-router-dom';
-import { Formik, useFormik } from 'formik';
-
-import { login } from '../../redux/slices/auth';
-import { clearMessage } from '../../redux/slices/message';
-import { CssTextField ,ColorButton,validationSchema} from '../../constance/css__const';
-
-
-const  LoginPage  =(props)=> {
+import "./login.css";
+import logo from "../../images/newLogo.png";
+import { Link, useNavigate } from "react-router-dom";
+import { Formik, useFormik } from "formik";
+import { login } from "../../redux/slices/auth";
+import { clearMessage } from "../../redux/slices/message";
+import { CssTextField, ColorButton } from "../../constance/css__const";
+import { InputAdornment } from "@mui/material";
+import { IconButton } from "@mui/material";
+import { Visibility } from "@mui/icons-material";
+import { VisibilityOff } from "@mui/icons-material";
+import doc from "../../images/newPic.png";
+import { Checkbox } from "@mui/material";
+import { validationSchema } from "../../utils/validations/validationLogin";
+const LoginPage = (props) => {
+  const { user } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
+
+  // Add these variables to your component to track the state
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
   useEffect(() => {
     dispatch(clearMessage());
   }, [dispatch]);
 
-  const navigate= useNavigate()
+  const navigate = useNavigate();
 
   const handleLogin = (formValue) => {
     const { email, password } = formValue;
+    console.log(formValue);
     setLoading(true);
     dispatch(login({ email, password }))
       .unwrap()
@@ -35,126 +46,134 @@ const  LoginPage  =(props)=> {
         setLoading(false);
       });
   };
-  const initialValues = {
-    email: "",
-    password: "",
-  };
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
+
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
     validationSchema: validationSchema,
     onSubmit: (event) => {
-      
-       handleLogin()
-     
+      handleLogin(event);
     },
-  }); 
- 
+  });
+
   if (isLoggedIn) {
-    return navigate("/profile")
-  } 
+    if (user.pwdChangeRequired == true) {
+      // console.log(user);
+      navigate("/changepassword");
+    } else {
+      navigate("/main");
+    }
+  }
+
   return (
-    <div className='wrapper'>
-     
-      <div className='form__wrapper'>
-      <h1 className='title__log'>Вход</h1>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleLogin}
+    <div className="wrapper">
+      <div className="fon_bg">
+        <img src={logo} alt="logo" className="logo_style" />
+
+        <div className="png">
+          <img src={doc} alt="doc" />
+        </div>
+      </div>
+
+      <div className="form__wrapper">
+        <h1 className="title__log">Вход</h1>
+        <form
+          onSubmit={formik.handleSubmit}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              formik.handleSubmit();
+            }
+          }}
         >
-           {({
-             
-         values,
-         errors,
-         touched,
-         handleChange,
-         handleBlur,
-         handleSubmit,
-         isSubmitting,
-         /* and other goodies */
-       }) => (
-         <>
-        <CssTextField
-          id="email"
-          name="email"
-          label="Введите ваш E-mail"
-          placeholder="example@medtech.com"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
-          multiline
-          sx={{ 
-            fontSize: "18px",
-            lineHeight: "21px",
-            letterSpacing: "-0.04em",
-            width: "450px",
-            height: "60px",
-            marginBottom:"35px",
-            border:"none", 
-          }}
-        />
+          <CssTextField
+            id="email"
+            name="email"
+            label="Введите ваш E-mail"
+            placeholder="example@medtech.com"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+            multiline
+            sx={{
+              marginTop: "50px",
+              marginBottom: "40px",
+            }}
+          />
+          <CssTextField
+            id="password"
+            name="password"
+            label="Введите пароль"
+            type={showPassword ? "text" : "password"}
+            autoComplete="current-password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+            placeholder="*********"
+            InputProps={{
+              // <-- This is where the toggle button is added.
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            sx={{
+              marginBottom: "60px",
+            }}
+          />
+          <ColorButton
+            variant="contained"
+            type="submit"
+            sx={{
+              marginBottom: "30px",
+            }}
+          >
+            Войти
+          </ColorButton>
 
-        <CssTextField
-        id="password"
-        name="password"
-        label="Введите пароль"
-        type="password"
-        autoComplete="current-password"
-        value={formik.values.password}
-          onChange={formik.handleChange}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
-          placeholder="*********"
-          sx={{
-            
-            fontSize: "18px",
-            lineHeight: "21px",
-            letterSpacing: "-0.04em",
-            color: "#141414",
-            width: "450px",
-            height: "60px",
-            marginBottom:"60px",
-          }}
-
-        />
-        <ColorButton variant="contained" type="submit" sx={{width: "450px",
-            height: "60px",
-            
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
-            borderRadius: "20px",
-            textTransform: "none",
-            
-            fontStyle: "normal",
-            fontWeight: "600",
-            fontSize: "16px",
-            lineHeight: "24px",
-             marginBottom: "30px"
-            }} >Войти</ColorButton>
-
-        </> )}
-        </Formik>
-        
-       <div sx={{marginTop:"30px"}}>
-       {message && (
-        <div className="form-group">
-          <div className="alert alert-danger" role="alert">
-            {message}
+          <div sx={{ marginTop: "30px" }}>
+            {message && (
+              <div className="form-group">
+                <div
+                  style={{
+                    color: "red",
+                    fontSizre: "14px",
+                    marginBottom: "5px",
+                  }}
+                >
+                  {message}
+                </div>
+              </div>
+            )}
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+              <div style={{ display: "flex" }}>
+                <p style={{ margin: 0 }}>Запомнить меня</p>
+                <Checkbox
+                  sx={{ padding: 0, marginLeft: "3px," }}
+                  size="small"
+                />
+              </div>
+              <Link to="/forgotpassword" className="forgot">
+                Забыли пароль ?
+              </Link>
+            </div>
           </div>
-        </div>
-       
-      )}
-        <Link to="/forgotpassword" className='forgot'>Забыли пароль ?</Link>
-        </div>
-        </div>
-        <div className='back'>
-          <img className='fon' src={fon}></img>
-        </div>
-        </div>
-      
-  )
-}
+        </form>
+      </div>
+    </div>
+  );
+};
 export default LoginPage;
