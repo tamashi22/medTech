@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = process.env.REACT_APP_API;
+const API_URL = "https://medtech-team5.herokuapp.com/api/v1/";
 class TableServis{
     //for admin and doctors
     async getPatients(){
