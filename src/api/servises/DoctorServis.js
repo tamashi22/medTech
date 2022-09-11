@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL =  "https://medtech-team5.herokuapp.com/api/v1/";
+const API_URL =  "https://medtech-team5.herokuapp.com/api/";
 class DoctorServis{
     //for admin and doctors
     async getDoctorById(id){

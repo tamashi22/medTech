@@ -1,6 +1,6 @@
 import axios from 'axios';
 import authHeader from './AuthHeader';
-const API_URL =  "https://medtech-team5.herokuapp.com/api/v1/";
+const API_URL =  "https://medtech-team5.herokuapp.com/api/";
 class UserServis{
     getPublicContent(){
         return axios.get(API_URL + 'all');
